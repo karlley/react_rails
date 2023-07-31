@@ -42,18 +42,20 @@ const App = () => {
     fetch();
   };
 
+  //タスクが完了の値isDoneを更新する関数
+  const toggleIsDone = async (id, index) => {
+    const isDone = tasks[index].is_done;
+    await axios.put(`http://localhost:3010/tasks/${id}`, {
+      //isDoneプロパティのtrue/falseを反転
+      is_done: !isDone,
+    });
+    fetch();
+  };
+
   //初回レンダリング時に初期値をセット
   useEffect(() => {
     fetch();
   }, []);
-
-  //タスクが完了の値isDoneを更新する関数
-  const toggleIsDone = (index) => {
-    const tasksCopy = [...tasks];
-    const isDone = tasksCopy[index].is_done;
-    tasksCopy[index].isDone = !isDone; //isDoneプロパティのtrue/falseを反転
-    setTasks(tasksCopy); //反転した値で状態更新
-  };
 
   return (
     <Box mt="64px">

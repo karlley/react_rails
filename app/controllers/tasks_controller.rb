@@ -18,6 +18,13 @@ class TasksController < ApplicationController
     head :ok
   end
 
+  def update
+    task = Task.find(params[:id])
+    task.update(task_params)
+    #ヘッダのレスポンスのみを返す
+    head :ok
+  end
+
   private
 
   def task_params
