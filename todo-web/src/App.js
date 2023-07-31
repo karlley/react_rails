@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Task from "./components/Task";
 import { Center, Box, CheckboxGroup, Text } from "@chakra-ui/react";
+import axios from "axios";
 
 const App = () => {
-  //初期値
-  const initialTasks = [
-    {
-      name: "買い物",
-      isDone: true,
-    },
-    {
-      name: "ランニング",
-      isDone: false,
-    },
-    {
-      name: "プログラミングの勉強",
-      isDone: false,
-    },
-  ];
-
   //タスクの状態管理用の値、更新用の関数を定義
   const [tasks, setTasks] = useState([]);
 
+  //初期値を取得
+  const fetch = async () => {
+    //取得完了をawaitで待つ(非同期処理)
+    const res = await axios.get("http://localhost:3010/tasks");
+    //取得した値で初期値を更新
+    setTasks(res.data);
+  };
+
   //初回レンダリング時に初期値をセット
   useEffect(() => {
-    setTasks(initialTasks);
+    fetch();
   }, []);
 
   //タスクが完了の値isDoneを更新する関数
