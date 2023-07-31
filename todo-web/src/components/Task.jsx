@@ -1,6 +1,6 @@
-import Task from "./components/Task";
+import Task from './component/Task';
 
-function App() {
+const App = () => {
   return (
     <>
       <h1>タスク一覧</h1>
