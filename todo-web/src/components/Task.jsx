@@ -1,14 +1,20 @@
-import Task from './component/Task';
+import { Checkbox, Box, Text } from "@chakra-ui/react";
 
-const App = () => {
+const Task = (props) => {
   return (
-    <>
-      <h1>タスク一覧</h1>
-      <Task name="買い物" />
-      <Task name="ランニング" />
-      <Task name="プログラミングの勉強" />
-    </>
-  );
+    <Box mb="16px">
+      <Checkbox
+        isChecked={props.isDone}
+        colorScheme="blue"
+        size="lg"
+        onChange={() => {
+          props.toggleIsDone(props.index);
+        }}
+      >
+        <Text>{props.name}</Text>
+      </Checkbox>
+    </Box>
+  )
 }
 
-export default App;
+export default Task
