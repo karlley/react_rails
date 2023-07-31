@@ -11,9 +11,17 @@ class TasksController < ApplicationController
     head :created
   end
 
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    #ヘッダのレスポンスのみを返す
+    head :ok
+  end
+
   private
 
   def task_params
-    params.permit(:name, :is_done)
+    #requireでネストしたパラメータも許可する
+    params.require(:task).permit(:name, :is_done)
   end
 end

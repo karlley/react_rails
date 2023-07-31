@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "tasks" => "tasks#index"
   post "tasks" => "tasks#create"
+  delete "tasks/:id" => "tasks#destroy"
 end

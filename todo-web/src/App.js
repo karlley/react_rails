@@ -25,7 +25,6 @@ const App = () => {
     setTasks(res.data);
   };
 
-  //タスクを作成
   const createTask = async () => {
     await axios.post("http://localhost:3010/tasks", {
       name: name,
@@ -34,6 +33,12 @@ const App = () => {
     //タスク作成後に入力部を空にする
     setName("");
     //作成したタスクを含めて初期値を再取得
+    fetch();
+  };
+
+  const destroyTask = async (id) => {
+    //``で式展開する(テンプレートリテラル)
+    await axios.delete(`http://localhost:3010/tasks/${id}`);
     fetch();
   };
 
@@ -76,11 +81,13 @@ const App = () => {
             {tasks.map((task, index) => {
               return (
                 <Task
+                  id={task.id}
                   key={index}
                   index={index}
                   name={task.name}
                   isDone={task.is_done}
                   toggleIsDone={toggleIsDone}
+                  destroyTask={destroyTask}
                 />
               );
             })}

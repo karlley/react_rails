@@ -1,8 +1,9 @@
-import { Checkbox, Box, Text } from "@chakra-ui/react";
+import { Checkbox, Flex, Text } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
 
 const Task = (props) => {
   return (
-    <Box mb="16px">
+    <Flex mb="16px" justifyContent="space-between" alignItems="center">
       <Checkbox
         isChecked={props.isDone}
         colorScheme="blue"
@@ -13,8 +14,9 @@ const Task = (props) => {
       >
         <Text>{props.name}</Text>
       </Checkbox>
-    </Box>
-  )
-}
+      <CloseIcon onClick={() => props.destroyTask(props.id)} />
+    </Flex>
+  );
+};
 
-export default Task
+export default Task;
